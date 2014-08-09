@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://estei.github.io/sitemap.xml 
+Sitemap: http://rasmus.me/sitemap.xml 
