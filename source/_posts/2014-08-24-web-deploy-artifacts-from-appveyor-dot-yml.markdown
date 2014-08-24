@@ -3,7 +3,7 @@ layout: post
 title: "Web Deploy artifacts from appveyor.yml"
 date: 2014-08-24 18:33:05 +0200
 comments: true
-categories: appveyor artifacts WebDeployPackage
+categories: appveyor WebDeployPackage msdeploy 
 ---
 At work we have started using [Appveyor](http://appveyor.com) for building and deploying websites.
 This has led me to spend quite a bit of time with the configuration file appveyor.yml.
