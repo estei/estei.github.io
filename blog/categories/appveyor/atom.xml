@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[rasmus.me]]></title>
-  <link href="http://rasmus.me/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Appveyor | rasmus.me]]></title>
+  <link href="http://rasmus.me/blog/categories/appveyor/atom.xml" rel="self"/>
   <link href="http://rasmus.me/"/>
   <updated>2014-08-24T18:42:35+02:00</updated>
   <id>http://rasmus.me/</id>
@@ -32,21 +32,16 @@ This way you can clone your project and not have to set up a new build in appvey
 
 <p>It is quite easy to configure an artifact upload in yaml.</p>
 
-<figure class='code'><figcaption><span>Upload Web Deploy Package</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">artifacts</span><span class="p-Indicator">:</span>
-</span><span class='line'>  <span class="c1"># pushing the website package</span>
-</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">build\_PublishedWebsites\Website_Package\Website.zip</span>
-</span><span class='line'>    <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">WebsitePackage</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="yaml Upload Web Deploy Package">artifacts:
+  # pushing the website package
+  - path: build\_PublishedWebsites\Website_Package\Website.zip
+    name: WebsitePackage
+</code></pre>
 
 <p>As you can see in the picture below, the zip file was saved with the deployment name WebsitePackage.
 Everything looked like it should. Happy days!</p>
 
-<p><img src="http://rasmus.me/images/web-deploy-zip.png" title="Artifact as zip" alt="Artifact saved as zip archive"></p>
+<p><img src="/images/web-deploy-zip.png" title="&lsquo;Artifact as zip&rsquo; &lsquo;Artifact saved as zip archive&rsquo;" ></p>
 
 <p>Deployment to different environments  in Appveyor is so easy.
 It has a Web Deploy provider that is super easy to <a href="http://www.appveyor.com/docs/deployment/web-deploy">use</a>.
@@ -58,7 +53,7 @@ I wasn&rsquo;t really sure what was going on, as I had had this same deploy work
 <p>After some searching around, I found a difference between the two setups.
 When I configured the build through the web interface I had set the artifact type for the zip file to &ldquo;Web Deploy Package&rdquo;.</p>
 
-<p><img src="http://rasmus.me/images/artifact-web-deploy.png" title="Artifact as Web Deploy Package" alt="Artifact set to Web Deploy Package in web interface"></p>
+<p><img src="/images/artifact-web-deploy.png" title="&lsquo;Artifact as Web Deploy Package&rsquo; &lsquo;Artifact set to Web Deploy Package in web interface&rsquo;" ></p>
 
 <p>I couldn&rsquo;t find a way to do this in the yaml file. I searched through the otherwise great <a href="http://www.appveyor.com/docs">documentation</a>,
 but found nothing about how to set an artifact as a web deploy package in the appveyor.yml file.</p>
@@ -66,21 +61,15 @@ but found nothing about how to set an artifact as a web deploy package in the ap
 <p>After a bit of trial and error and some <a href="http://www.telerik.com/fiddler">fiddling</a> around with the web interface, I found out how to do it in appveyor.yml.
 You just need to set the type of the artifact to &ldquo;WebDeployPackage&rdquo;</p>
 
-<figure class='code'><figcaption><span>With type</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">artifacts</span><span class="p-Indicator">:</span>
-</span><span class='line'>  <span class="c1"># pushing the website package</span>
-</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">build\_PublishedWebsites\Website_Package\Website.zip</span>
-</span><span class='line'>    <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">WebsitePackage</span>
-</span><span class='line'>    <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">WebDeployPackage</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="yaml With type">artifacts:
+  # pushing the website package
+  - path: build\_PublishedWebsites\Website_Package\Website.zip
+    name: WebsitePackage
+    type: WebDeployPackage
+</code></pre>
 
 <p>Now the artifact type in the &ldquo;Artifacts&rdquo; tab shows as a Webdeploy package.
-<img src="http://rasmus.me/images/web-deploy-webdeploy.png" title="[Artifact as zip [Artifact saved as zip archive]]" ></p>
+<img src="/images/web-deploy-webdeploy.png" title="[Artifact as zip [Artifact saved as zip archive]]" ></p>
 
 <p>That made everything right. Now when I run the deploy with the package the right files are placed in the wwwroot directory, not in some deep deep subdirectory.</p>
 
